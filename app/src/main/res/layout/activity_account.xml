@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Account"
+                android:textStyle="bold"
+                android:textSize="35sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back_black_48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/back"/>
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/mem"
+        android:layout_marginTop="16dp"
+        android:id="@+id/accimg"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accimg"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:text="Acc Name"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/accname"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accname"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:text="Email"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/accmail"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change password"
+            android:textColor="#1a535c"
+            android:id="@+id/chpass"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change name"
+            android:layout_marginTop="10dp"
+            android:textColor="#1a535c"
+            android:id="@+id/chname"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete account"
+            android:layout_marginTop="10dp"
+            android:textColor="#ff6b6b"
+            android:id="@+id/delete"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
