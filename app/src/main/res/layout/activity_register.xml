@@ -37,6 +37,7 @@
         android:layout_marginRight="50dp"
 
         android:layout_above="@+id/mail"
+        android:maxLines="1"
 
         android:hint="Your name"/>
 
@@ -53,6 +54,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
 
+        android:maxLines="1"
         android:layout_above="@+id/password"
 
         android:hint="Your email"/>
@@ -72,6 +74,7 @@
 
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
+        android:maxLines="1"
 
         android:inputType="textPassword"
         android:hint="Password"/>

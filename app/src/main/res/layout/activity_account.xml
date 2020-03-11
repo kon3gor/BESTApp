@@ -31,7 +31,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_back_black_48dp"
+                app:srcCompat="@drawable/ic_arrow_back_black_48dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/back"/>
@@ -101,7 +101,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change name"
+            android:text="Change email"
             android:layout_marginTop="10dp"
             android:textColor="#1a535c"
             android:id="@+id/chname"/>
@@ -113,6 +113,16 @@
             android:layout_marginTop="10dp"
             android:textColor="#ff6b6b"
             android:id="@+id/delete"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textColor="#ff6b6b"
+            android:id="@+id/logout"/>
+
 
     </LinearLayout>
 
