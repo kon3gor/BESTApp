@@ -24,10 +24,10 @@ class IventActivity : AppCompatActivity() {
         val participate = findViewById<Button>(R.id.participate)
         val desc = findViewById<TextView>(R.id.desc)
         val date = findViewById<TextView>(R.id.date)
-            val leave = findViewById<TextView>(R.id.leave)
+        val leave = findViewById<TextView>(R.id.leave)
         val delete = findViewById<Button>(R.id.delete)
 
-        var ivents = ArrayList<String>()
+        var users = ArrayList<String>()
 
         val db = Firebase.firestore
         db.collection("Ivents").document(text)
@@ -35,7 +35,7 @@ class IventActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 desc.text = it.get("desc").toString()
                 date.text = it.get("date").toString()
-                ivents = it.get("users") as ArrayList<String>
+                users = it.get("users") as ArrayList<String>
                 if (it.get("owner") == FirebaseAuth.getInstance().currentUser?.email){
                     leave.visibility = View.INVISIBLE
                     delete.setOnClickListener {
@@ -70,11 +70,11 @@ class IventActivity : AppCompatActivity() {
             participate.visibility = View.INVISIBLE
             leave.setOnClickListener {
 
-                val r = ivents.remove(FirebaseAuth.getInstance().currentUser?.email.toString())
+                val r = users.remove(FirebaseAuth.getInstance().currentUser?.email.toString())
                 Log.e("fuck", r.toString())
 
                 db.collection("Ivents").document(text)
-                    .update("users", ivents)
+                    .update("users", users)
                     .addOnFailureListener {
                         Log.e("fuck", it.toString())
                     }
@@ -88,10 +88,10 @@ class IventActivity : AppCompatActivity() {
         else{
             leave.visibility = View.INVISIBLE
             participate.setOnClickListener{
-                ivents.add(FirebaseAuth.getInstance().currentUser?.email.toString())
+                users.add(FirebaseAuth.getInstance().currentUser?.email.toString())
 
                 db.collection("Ivents").document(text)
-                    .update("users", ivents)
+                    .update("users", users)
                     .addOnFailureListener {
                         Log.e("fuck", it.toString())
                     }
