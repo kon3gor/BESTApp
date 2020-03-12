@@ -24,7 +24,8 @@ class IventActivity : AppCompatActivity() {
         val participate = findViewById<Button>(R.id.participate)
         val desc = findViewById<TextView>(R.id.desc)
         val date = findViewById<TextView>(R.id.date)
-        val leave = findViewById<TextView>(R.id.leave)
+            val leave = findViewById<TextView>(R.id.leave)
+        val delete = findViewById<Button>(R.id.delete)
 
         var ivents = ArrayList<String>()
 
@@ -35,6 +36,24 @@ class IventActivity : AppCompatActivity() {
                 desc.text = it.get("desc").toString()
                 date.text = it.get("date").toString()
                 ivents = it.get("users") as ArrayList<String>
+                if (it.get("owner") == FirebaseAuth.getInstance().currentUser?.email){
+                    leave.visibility = View.INVISIBLE
+                    delete.setOnClickListener {
+                        db.collection("Ivents").document(text).delete()
+                            .addOnCompleteListener {
+                                Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
+                                this.onBackPressed()
+                                this.finish()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this, "Failes", Toast.LENGTH_SHORT).show()
+                                Log.e("fuck", it.toString())
+                            }
+                    }
+                }
+                else{
+                    delete.visibility = View.INVISIBLE
+                }
             }
             .addOnFailureListener{
                 Log.e("fuck", it.toString())
@@ -84,6 +103,7 @@ class IventActivity : AppCompatActivity() {
                     }
             }
         }
+
 
         findViewById<ImageView>(R.id.back).setOnClickListener{
             this.onBackPressed()

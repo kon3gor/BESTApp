@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IventActivity">
+    tools:context=".NewIventActivity"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,14 +17,12 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rel">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/ivent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Ivent"
+                android:text="Create new Ivent"
                 android:textStyle="bold"
                 android:textSize="35sp"
                 android:layout_alignParentEnd="true"
@@ -41,63 +40,51 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_marginTop="30dp"
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:hint="Name of ivent"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp" />
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/desc"
-        android:layout_below="@+id/toolbar"
-        android:textSize="20sp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/name"
+        android:hint="Description for your ivent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         />
-    <TextView
-        android:layout_marginTop="16dp"
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/date"
         android:layout_below="@+id/desc"
-        android:textSize="20dp"
-        android:text="date"
-        android:gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:id="@+id/date"/>
+        android:hint="Enter the date of your ivent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/participate"
         android:layout_below="@+id/date"
-        android:layout_marginRight="50dp"
+        android:id="@+id/choosedate"
         android:layout_marginLeft="50dp"
-        android:text="Participate !!"/>
-
+        android:layout_marginRight="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="Choose date"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/participate"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:text="Chat"
-        android:id="@+id/chat"/>
+        android:id="@+id/submit"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/choosedate"
+        android:text="Add !!"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chat"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:text="delete"
-        android:id="@+id/delete" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Leave"
-        android:layout_below="@+id/delete"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/leave" />
 
 </RelativeLayout>

@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         val db = Firebase.firestore
         val auth = FirebaseAuth.getInstance()
         val ivents = ArrayList<String>()
+        var map = mutableMapOf<Long, String>()
         db.collection("Ivents")
             .get()
             .addOnSuccessListener { result ->
@@ -45,8 +46,13 @@ class HomeFragment : Fragment() {
                     val list = document.get("users") as ArrayList<String>
                     if (list.contains(auth.currentUser?.email)){
                         Log.e("fuck", "nice")
-                        ivents.add(document.get("name").toString())
+                        val name = document.get("name").toString()
+                        val time = document.get("time").toString().toLong()
+                        map.put(time, name)
                     }
+                }
+                map.toSortedMap().values.forEach {
+                    ivents.add(it)
                 }
                 listView.apply {
                     adapter = IventAdapter(context, ivents, false)

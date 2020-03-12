@@ -56,5 +56,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.1'
 
 
-
 }

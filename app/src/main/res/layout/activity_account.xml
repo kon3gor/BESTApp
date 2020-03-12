@@ -101,7 +101,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change email"
+            android:text="Change name"
             android:layout_marginTop="10dp"
             android:textColor="#1a535c"
             android:id="@+id/chname"/>
@@ -127,8 +127,18 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:srcCompat="@drawable/ic_add_black_24dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:id="@+id/fbtn"
+        android:clickable="true"
+        android:focusable="true"
+        app:borderWidth="0dp"/>
 
 
 

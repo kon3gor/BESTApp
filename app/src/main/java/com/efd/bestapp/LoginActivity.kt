@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.login).setOnClickListener {
 
-            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+            auth.signInWithEmailAndPassword(email.text.toString().trim(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information

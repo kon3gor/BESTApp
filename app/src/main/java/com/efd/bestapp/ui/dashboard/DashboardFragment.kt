@@ -27,6 +27,11 @@ class DashboardFragment : Fragment() {
         return root
     }
 
+    override fun onStart() {
+        getIvents()
+        super.onStart()
+    }
+
     private fun getIvents(): ArrayList<String> {
         val db = Firebase.firestore
         val auth = FirebaseAuth.getInstance()

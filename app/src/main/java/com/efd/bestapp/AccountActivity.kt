@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -73,6 +74,11 @@ class AccountActivity : AppCompatActivity() {
                 startActivity(intent)
                 this.finish()
             }
+            R.id.fbtn -> {
+
+                val intent = Intent(this, NewIventActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -105,6 +111,7 @@ class AccountActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.chpass).setOnClickListener(clickListener)
         findViewById<TextView>(R.id.chname).setOnClickListener(clickListener)
         findViewById<TextView>(R.id.logout).setOnClickListener(clickListener)
+        findViewById<FloatingActionButton>(R.id.fbtn).setOnClickListener(clickListener)
 
     }
 }
