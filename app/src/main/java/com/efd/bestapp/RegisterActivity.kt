@@ -31,37 +31,44 @@ class RegisterActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.signup).setOnClickListener{
 
-            auth.createUserWithEmailAndPassword(email.text.toString().trim(), password.text.toString())
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("fuck", "createUserWithEmail:success")
+            if (password.text.toString().length < 6){
+                Toast.makeText(this, "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
+            }
+            else{
 
-                        val user = hashMapOf(
-                            "name" to findViewById<EditText>(R.id.name).text.toString()
-                        )
-                        db.collection("users").document(email.text.toString())
-                            .set(user)
-                            .addOnSuccessListener {
-                                Log.d("fuck", "success")
-                            }
-                            .addOnFailureListener {
-                                Log.e("fuck", it.toString())
-                            }
+                auth.createUserWithEmailAndPassword(email.text.toString().trim(), password.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("fuck", "createUserWithEmail:success")
 
-                        val intent = Intent(this, IventsActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intent)
-                        this.finish()
+                            val user = hashMapOf(
+                                "name" to findViewById<EditText>(R.id.name).text.toString()
+                            )
+                            db.collection("users").document(email.text.toString().trim())
+                                .set(user)
+                                .addOnSuccessListener {
+                                    Log.d("fuck", "success")
+                                }
+                                .addOnFailureListener {
+                                    Log.e("fuck", it.toString())
+                                }
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("fuck", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, IventsActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            this.finish()
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("fuck", "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        }
+
+                        // ...
                     }
+            }
 
-                    // ...
-                }
 
 
         }
