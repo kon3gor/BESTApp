@@ -28,9 +28,10 @@ class RegisterActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.mail)
         val password = findViewById<EditText>(R.id.password)
 
+
         findViewById<Button>(R.id.signup).setOnClickListener{
 
-            auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
+            auth.createUserWithEmailAndPassword(email.text.toString().trim(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
