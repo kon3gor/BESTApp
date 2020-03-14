@@ -1,5 +1,6 @@
 package com.efd.bestapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,7 @@ class IventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ivent)
 
-        val text = intent.extras?.get("ivent").toString()
+        val eventName = intent.extras?.get("ivent").toString()
         val part = intent.extras?.get("showpart") as Boolean
         val participate = findViewById<Button>(R.id.participate)
         val desc = findViewById<TextView>(R.id.desc)
@@ -30,16 +31,17 @@ class IventActivity : AppCompatActivity() {
         var users = ArrayList<String>()
 
         val db = Firebase.firestore
-        db.collection("Ivents").document(text)
+        db.collection("Ivents").document(eventName)
             .get()
             .addOnSuccessListener {
                 desc.text = it.get("desc").toString()
                 date.text = it.get("date").toString()
                 users = it.get("users") as ArrayList<String>
                 if (it.get("owner") == FirebaseAuth.getInstance().currentUser?.email){
-                    leave.visibility = View.INVISIBLE
+                    leave.visibility = View.GONE
+                    participate.visibility = View.GONE
                     delete.setOnClickListener {
-                        db.collection("Ivents").document(text).delete()
+                        db.collection("Ivents").document(eventName).delete()
                             .addOnCompleteListener {
                                 Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
                                 this.onBackPressed()
@@ -49,31 +51,42 @@ class IventActivity : AppCompatActivity() {
                                 Toast.makeText(this, "Failes", Toast.LENGTH_SHORT).show()
                                 Log.e("fuck", it.toString())
                             }
+                        db.collection("messages")
+                            .get()
+                            .addOnSuccessListener {
+                                it.documents.forEach {
+                                    if (it.getString("event") == eventName){
+                                        db.collection("messages").document(it.id)
+                                            .delete()
+                                    }
+                                }
+
+                            }
                     }
                 }
                 else{
-                    delete.visibility = View.INVISIBLE
+                    delete.visibility = View.GONE
                 }
             }
             .addOnFailureListener{
                 Log.e("fuck", it.toString())
             }
 
-            if (text.length > 10){
-                findViewById<TextView>(R.id.ivent).text = text.substring(0, 10)
+            if (eventName.length > 10){
+                findViewById<TextView>(R.id.ivent).text = eventName.substring(0, 10)
             }
             else{
-                findViewById<TextView>(R.id.ivent).text = text
+                findViewById<TextView>(R.id.ivent).text = eventName
             }
 
         if (!part){
-            participate.visibility = View.INVISIBLE
+            participate.visibility = View.GONE
             leave.setOnClickListener {
 
                 val r = users.remove(FirebaseAuth.getInstance().currentUser?.email.toString())
                 Log.e("fuck", r.toString())
 
-                db.collection("Ivents").document(text)
+                db.collection("Ivents").document(eventName)
                     .update("users", users)
                     .addOnFailureListener {
                         Log.e("fuck", it.toString())
@@ -86,11 +99,11 @@ class IventActivity : AppCompatActivity() {
             }
         }
         else{
-            leave.visibility = View.INVISIBLE
+            leave.visibility = View.GONE
             participate.setOnClickListener{
                 users.add(FirebaseAuth.getInstance().currentUser?.email.toString())
 
-                db.collection("Ivents").document(text)
+                db.collection("Ivents").document(eventName)
                     .update("users", users)
                     .addOnFailureListener {
                         Log.e("fuck", it.toString())
@@ -113,7 +126,10 @@ class IventActivity : AppCompatActivity() {
 
 
         findViewById<Button>(R.id.chat).setOnClickListener {
-
+            val intent = Intent(this, ChatActivity::class.java).apply {
+                putExtra("name", eventName)
+            }
+            startActivity(intent)
         }
     }
 }
